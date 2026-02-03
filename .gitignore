@@ -1,0 +1,20 @@
+# Virtual Environments
+venv/
+*/venv/
+
+# Python Cache
+__pycache__/
+*.pyc 
+
+# Environment Variables
+
+.env 
+
+# Scrapy logs
+
+*.log 
+
+# OS files
+
+.DS_Store
+
