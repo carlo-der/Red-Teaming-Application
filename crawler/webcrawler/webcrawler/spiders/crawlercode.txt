@@ -1,0 +1,136 @@
+class CrawlingSpider(CrawlSpider):
+    name = "primarycrawler"
+    allowed_domains = ["toscrape.com"]
+    start_urls = ["http://books.toscrape.com/"]
+
+
+    rules = (
+        Rule(LinkExtractor(allow="catalogue/category")),
+        Rule(LinkExtractor(allow="catalogue", deny="category"), callback= "parse_item"),
+    )
+
+    def parse_item(self,response):
+        yield {
+            "title": response.css(".product_main h1::text").get(),
+            "price": response.css(".price_color::text").get(),
+            "availability": response.css(".availability::text")[1].get().replace("\n", ""),
+        }
+
+
+
+def parse_start_url(self,response):
+        """Parse the inital course page"""
+        # Retrieve and scrape the course information
+        course_information = {
+            'url': response.url,
+            'course_title': response.css('h1::text').get(),
+            'staff_names': [],
+            "staff_external_links": [],
+            "stafff_email_addresses": []
+        }
+
+
+        #Look for staff names using patterns  (e.g., 'taught by', 'module / course leader')
+        text_content = response.css('body').get()
+
+        #Find potential names of staff
+        staff_locator = [
+            r'(?:taught by|course leader|module leader|lecturer)[\s:]+([A-Z][a-z]+\s+[A-Z][a-z]+)',
+            r'Dr\.?\s+([A-Z][a-z]+\s+[A-Z][a-z]+)',
+            r'Professor\.?\s+([A-Z][a-z]+\s+[A-Z][a-z]+)',
+            r'sys_16[^>]*>([^<]+)</a>'
+        ]
+
+
+        initial_names = []
+        for pattern in staff_locator:
+            match= re.findall(pattern, response.text, re.IGNORECASE)
+            initial_names.extend(match)
+
+        cleaned_names = []
+
+        # Words found during testing that are not names - removed from final name list
+        false_positives = [
+            'at the', 'and other', 'in the', 'of the', 'to the', 'for the', 'by the', 'with the', 'is an', 'has a', 'as a'
+
+        ]
+
+        for name in inital_names:
+            name=name.strip()
+            name= name.replace(',', '') # removal of commas to leave pure name
+
+            # if know false positive is read, it is skipped and not added to the list
+
+            if name.lower() in false_positives:
+                continue
+
+            # if either word is less than two characters, it is also skipped
+            name_breakdown = name.split()
+            if any(len(part)<2 for part in name_breakdown):
+                continue
+
+            cleaned_names.append(name)
+        
+        # remove duplicate results from scrape
+        seen = set()
+        unique_names =[]
+        for name in cleaned_names:
+            if name not in seen:
+                seen.add(name)
+                unique_names.append(name)
+
+        course_information['staff_names'] = unique_names
+
+
+
+        #Find links to staff profiles on site
+
+        staff_external_links = response.css('a[href*="staff"]::attr(href)').getall()
+        course_information['staff_links'] = list(set([response.urljoin(link) for link in staff_external_links]))
+
+        # Find any linked email addresses available on the page
+
+        email_locator = r'\b[A-Za-z0-9._%+-]+@brighton\.ac\.uk\b'
+        email = re.findall(email_locator, response.text)
+        course_information['staff_emails'] = list(set(email))
+
+        yield course_information
+
+
+#Find potential names of staff
+        staff_locator = [
+            r'(?:taught by|course leader|module leader|lecturer)[\s:]+([A-Z][a-z]+\s+[A-Z][a-z]+)',
+            r'Dr\.?\s+([A-Z][a-z]+\s+[A-Z][a-z]+)',
+            r'Professor\.?\s+([A-Z][a-z]+\s+[A-Z][a-z]+)',
+            r'sys_16[^>]*>([^<]+)</a>'
+        ]
+
+
+        initial_names = []
+        for pattern in staff_locator:
+            match= re.findall(pattern, response.text, re.IGNORECASE)
+            initial_names.extend(match)
+
+        cleaned_names = []
+
+        # Words found during testing that are not names - removed from final name list
+        false_positives = [
+            'at the', 'and other', 'in the', 'of the', 'to the', 'for the', 'by the', 'with the', 'is an', 'has a', 'as a'
+
+        ]
+
+        for name in initial_names:
+            name=name.strip()
+            name= name.replace(',', '') # removal of commas to leave pure name
+
+            # if know false positive is read, it is skipped and not added to the list
+
+            if name.lower() in false_positives:
+                continue
+
+            # if either word is less than two characters, it is also skipped
+            name_breakdown = name.split()
+            if any(len(part)<2 for part in name_breakdown):
+                continue
+
+            cleaned_names.append(name)
