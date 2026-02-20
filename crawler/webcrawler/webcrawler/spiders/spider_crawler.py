@@ -4,15 +4,15 @@ import re
 
 
 
-
-
-
-
-
 class UniWebCrawler(CrawlSpider):
     name = "project_crawler"
-    allowed_domains = ["brighton.ac.uk"]
+    allowed_domains = ["brighton.ac.uk", "research.brighton.ac.uk"]
     start_urls = ["https://www.brighton.ac.uk/courses/study/computer-science-with-cyber-security-bsc-hons.aspx"]
+
+    def __init__(self, start_url=None, *args **kwargs):
+        super().__init__(*args, **kwargs)
+        if start_url:
+            self.start_urls = [start_url]
 
     custom_settings = {
         'DOWNLOAD_DELAY': 2, # leaves 2 seconds between requests to webpage
@@ -87,5 +87,11 @@ class UniWebCrawler(CrawlSpider):
         email_locator = r'\b[A-Za-z0-9._%+-]+@brighton\.ac\.uk\b'
         email = re.findall(email_locator, response.text)
         course_information['staff_emails'] = list(set(email))
+
+        for links in all_links:
+            yield response.follow(
+                link,
+                callback=self.parse_staff_profiles
+            )
 
         yield course_information
