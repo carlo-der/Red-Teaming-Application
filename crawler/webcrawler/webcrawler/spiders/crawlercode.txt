@@ -134,3 +134,56 @@ def parse_start_url(self,response):
                 continue
 
             cleaned_names.append(name)
+
+'USER_AGENT': 'UniversityOfBrightonFinalProject/1.0 (Final Year Project; c.deretuerto1@uni.brighton.ac.uk)', # declares bot purpose and origin to site
+
+
+
+
+
+
+
+if (item.type === 'staff_profile') {
+                    const readable_text =`
+                    ----------------------
+                    NAME: ${item.name || 'Not found'}
+                    ROLE: ${item.job_name || 'N/A'}
+                    EMAIL: ${item.email || 'Hidden / Encrypted'}
+                    INTERESTS: ${item.research_interests ? item.research_interests.join(', '): 'N/A'}
+                    URL: ${item.url}
+                    
+
+                    
+
+                    ---------------------- `;
+                    
+
+                    const pre = document.createElement('pre');
+                    pre.textContent = readable_text;
+                    result.appendChild(pre);
+                }
+
+
+
+
+
+
+                html +=`
+                            <div class="staff-card">
+                                <h3>${item.name||'name not found'}<h3>
+                                <p><strong>Job Title:</strong> <a href="${item.job_title}|| 'N/A' </p>
+                                <p><strong>Email:</strong>${item.email && !item.email.includes('encrypted') ? item.email:'Not Available'}</p>
+                                <p><strong>Research Interests:</strong></p>
+                                <ul>
+                                    ${item.research_interests && item.research_interests.length >0 ? item.research_interests.filter(i => i).map(interest => `<li>${interest}</li>`).join('') : '<li>None Listed</li>'}
+                                </ul>
+
+                                <p><strong>Qualifications</strong></p>
+                                <ul>
+                                    ${item.qualifications && item.qualifications.length >0 ? item.qualifications.filter(q => q).map(qualif => `<li>${qualif}</li>`,join('')): `<li>None Listed</li>`}
+                                </ul>
+
+                                <p><strong>External Links:</strong></p>
+                                ${item.external_links && Object.keys(item.external_links).length>0 ? Object.entries(item.external_links).map(([platform, url]) => `<a href="${url}" target="_blank">${platform}</a>`).join(' | '): 'No External Links Found'}
+                            </div>
+                        `;

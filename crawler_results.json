@@ -1,0 +1,142 @@
+[
+{
+  "type": "course_summary",
+  "url": "https://www.brighton.ac.uk/courses/study/computer-science-with-cyber-security-bsc-hons.aspx",
+  "extracted_staff": [
+    {
+      "name": "Dr Michalis Pavlidis"
+    },
+    {
+      "name": "Dr Karl Cox"
+    },
+    {
+      "name": "Dr Goran Soldar"
+    },
+    {
+      "name": "Dr Nikolaos Polatidis"
+    },
+    {
+      "name": "Andrew Montgomery"
+    },
+    {
+      "name": "Jennie Harding"
+    }
+  ],
+  "links_found": 6
+},
+{
+  "type": "staff_profile",
+  "url": "https://research.brighton.ac.uk/en/persons/jennie-harding/",
+  "name": "Jennie Harding",
+  "job_title": null,
+  "email": null,
+  "phone": null,
+  "research interests": [],
+  "qualifications": [],
+  "external_links": {
+    "X": "https://twitter.com/intent/tweet?url=https://research.brighton.ac.uk/en/persons/jennie-harding/%3Futm_source%3Dtwitter%26utm_medium%3Dsocial%26utm_campaign%3Dsharelink&text=Check+out+this+researcher+at+The+University+of+Brighton%3A+Jennie+Harding"
+  }
+},
+{
+  "type": "staff_profile",
+  "url": "https://research.brighton.ac.uk/en/persons/goran-soldar/",
+  "name": "Goran Soldar",
+  "job_title": null,
+  "email": null,
+  "phone": null,
+  "research interests": [],
+  "qualifications": [],
+  "external_links": {
+    "X": "https://twitter.com/intent/tweet?url=https://research.brighton.ac.uk/en/persons/goran-soldar/%3Futm_source%3Dtwitter%26utm_medium%3Dsocial%26utm_campaign%3Dsharelink&text=Check+out+this+researcher+at+The+University+of+Brighton%3A+Goran+Soldar"
+  }
+},
+{
+  "type": "staff_profile",
+  "url": "https://research.brighton.ac.uk/en/persons/andrew-montgomery/",
+  "name": null,
+  "job_title": null,
+  "email": "A.Montgomery@brighton.ac.uk",
+  "phone": "+44 7776 014 222",
+  "research interests": [],
+  "qualifications": [
+    "BSc",
+    "MSc"
+  ],
+  "job_name": null,
+  "research_interests": [
+    "AI, Legal Practice",
+    "Family Law"
+  ],
+  "external_links": {
+    "X": "https://twitter.com/intent/tweet?url=https://research.brighton.ac.uk/en/persons/andrew-montgomery/%3Futm_source%3Dtwitter%26utm_medium%3Dsocial%26utm_campaign%3Dsharelink&text=Check+out+this+researcher+at+The+University+of+Brighton%3A+Andrew+Montgomery"
+  }
+},
+{
+  "type": "staff_profile",
+  "url": "https://research.brighton.ac.uk/en/persons/nick-polatidis/",
+  "name": null,
+  "job_title": null,
+  "email": "encryptedA(); brighton.ac encryptedDot(); uk",
+  "phone": null,
+  "research interests": [],
+  "qualifications": [
+    "BSc (Hons)",
+    "MSc in Internet Software Systems",
+    "PhD in Applied Informatics"
+  ],
+  "job_name": null,
+  "research_interests": [
+    "Applied Artificial Intelligence, Machine Learning"
+  ],
+  "external_links": {
+    "linkedin": "https://www.linkedin.com/in/nikolaos-polatidis-4488a4aa/",
+    "google_scholar": "https://scholar.google.co.uk/citations?user=7KBfJKUAAAAJ&hl=en&oi=ao",
+    "orcid": "https://orcid.org/0000-0003-4249-4953",
+    "X": "https://twitter.com/intent/tweet?url=https://research.brighton.ac.uk/en/persons/nick-polatidis/%3Futm_source%3Dtwitter%26utm_medium%3Dsocial%26utm_campaign%3Dsharelink&text=Check+out+this+researcher+at+The+University+of+Brighton%3A+Nikolaos+Polatidis"
+  }
+},
+{
+  "type": "staff_profile",
+  "url": "https://research.brighton.ac.uk/en/persons/karl-cox/",
+  "name": null,
+  "job_title": null,
+  "email": null,
+  "phone": null,
+  "research interests": [],
+  "qualifications": [
+    "Requirements Engineering",
+    "Keyphrases",
+    "Case Study",
+    "Japan",
+    "Security Requirements",
+    "Engineering Approach",
+    "IT Requirements",
+    "Business Strategy",
+    "Privacy-by-Design"
+  ],
+  "job_name": null,
+  "research_interests": [
+    "Requirement Engineering",
+    "Computer Science"
+  ],
+  "external_links": {
+    "X": "https://twitter.com/intent/tweet?url=https://research.brighton.ac.uk/en/persons/karl-cox/%3Futm_source%3Dtwitter%26utm_medium%3Dsocial%26utm_campaign%3Dsharelink&text=Check+out+this+researcher+at+The+University+of+Brighton%3A+Karl+Cox"
+  }
+},
+{
+  "type": "staff_profile",
+  "url": "https://research.brighton.ac.uk/en/persons/michalis-pavlidis/",
+  "name": "Michalis Pavlidis",
+  "job_title": null,
+  "email": null,
+  "phone": null,
+  "research interests": [],
+  "qualifications": [],
+  "external_links": {
+    "linkedin": "https://www.linkedin.com/in/mpavlidis/",
+    "X": "https://twitter.com/intent/tweet?url=https://research.brighton.ac.uk/en/persons/michalis-pavlidis/%3Futm_source%3Dtwitter%26utm_medium%3Dsocial%26utm_campaign%3Dsharelink&text=Check+out+this+researcher+at+The+University+of+Brighton%3A+Michalis+Pavlidis",
+    "google_scholar": "https://scholar.google.co.uk/citations?user=pW7JLFQAAAAJ&hl=en ",
+    "orcid": "https://orcid.org/0000-0001-9135-2340"
+  }
+}
+]

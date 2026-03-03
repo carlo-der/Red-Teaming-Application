@@ -11,10 +11,23 @@ class UniWebCrawler(Spider):
   
 
     custom_settings = {
-        'DOWNLOAD_DELAY': 2, # leaves 2 seconds between requests to webpage
+        'DOWNLOAD_DELAY': 3.0, # leaves 2 seconds between requests to webpage
         'CONCURRENT_REQUESTS': 1, # ensures only 1 request happens at a time
         'ROBOTSTXT_OBEY': True, # ensures crawler respects robots.txt
-        'USER_AGENT': 'UniversityOfBrightonFinalProject/1.0 (Final Year Project; c.deretuerto1@uni.brighton.ac.uk)' # declares bot purpose and origin to site
+        'RANDOMIZE_DOWNLOAD_DELAY': True,
+        "COOKIES_ENABLED": False,
+        'USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'DEFAULT_REQUEST_HEADERS': {
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            'Accept-Language': 'en',
+            'Connection': 'keep-alive',
+            'Cache-Control': 'max-age=0',
+        },
+        'HTTPCACHE_ENABLED': False,
+        'DUPEFILTER_CLASS': 'scrapy.dupefilters.BaseDupeFilter',
+        'FEED_FORMAT': 'json',
+        'FEED_EXPORT_INDENT': 2
+        
     }
 
     
@@ -94,11 +107,25 @@ class UniWebCrawler(Spider):
                 callback=self.parse_staff_profile
             )
 
-        yield course_information
+       
 
     def parse_staff_profile(self, response): #method to extract profile information
 
         import ollama
+        
+        
+
+        extracted_info = {
+            'type': 'staff_profile',
+            'url': response.url,
+            'name': response.css('h1::text').get() or response.css('title::text').get(),
+            'job_title': None, 
+            'email': None,
+            'phone': None,
+            'research interests': [],
+            'qualifications': []
+        }
+
 
 
         page_text = ' '.join(response.css('body *::text').getall())
@@ -133,9 +160,12 @@ Page content:
             elif '```' in response_info:
                 response_info = response_info.split('```')[1].split('```')[0]
 
-            extracted_info = json.loads(response_info.strip())
-            extracted_info['type'] = 'staff_profile'
-            extracted_info['url'] = response.url
+            ###extracted_info = json.loads(response_info.strip())
+            ##extracted_info['type'] = 'staff_profile'
+            #extracted_info['url'] = response.url
+
+            ollama_data= json.loads(response_info.strip())
+            extracted_info.update(ollama_data)
 
         except Exception as e:
             self.logger.error(f"Ollama extraction failed: {e}")
