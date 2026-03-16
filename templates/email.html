@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+    <title>Email Generator Tool</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/css.css')}}">
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back"> Back to homepage</a>
+
+        <h1>Phishing Email Generator</h1>
+        <p>Generate personalised phishing emails for simulation based on scraped data</p>
+
+        <div class="email-options">
+            <h3>Select Email Type</h3>
+            <select id="template">
+                <option value="urgent">Urgent IT Security Email</option>
+                <option value="research">Research Collaboration</option>
+                <option value="conference">Conference Opportunity</option>
+                <option value="grant">Grant Opportunity</option>
+            </select>
+
+            <button id="generatebutton" onclick="generateEmails()"> Generate Emails</button>
+        </div>
+
+        <div id="emailstatus"></div>
+        <div id="emailResults"></div>
+    </div>
+    
+</body>

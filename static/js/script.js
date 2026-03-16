@@ -32,8 +32,10 @@ async function runCrawler() {
                 status.textContent = 'No Data found';
                 return;
             }
-            //result.textContent= JSON.stringify(data.data, null, 2);
-            //const resultContainer = document.getElementById('text-results');
+
+            localStorage.setItem('crawleroutput', JSON.stringify(data.data));
+            localStorage.setItem('crawlerTime', new Date().toISOString());
+            
             let resultContainer = document.getElementById('text-results');
 
             if(!resultContainer)
@@ -99,21 +101,7 @@ async function runCrawler() {
                         `;
 
 
-                        //let external_url = 'None Found';
-                        //if (item.external_links && Object.keys(item.external_links).length>0) {
-                           // external_url = Object.entries(item.external_links)
-                           // .map(([platform, url]) => `<a href="${url}" target="_blank" class="social-tag">${platform.toUpperCase()}</a>`)
-                            //.join('');
-                        //}
-
-                        //card.innerHTML = `
-                        //<h3 style="margin-top:0;"> ${item.name || 'Staff Member'}</h3>
-                        //<p><strong>Role:</strong>${item.job_name || 'N/A'}</p>
-                        //<p><strong>Email:</strong> <code>${item.email || 'Hidden'}</code></p>
-                        //<p><strong>Research Interests:</strong> ${item.research_interests ? item.research_interests.join(', '): 'N/A'}</p>
-                        //<p><strong>External Links:</strong> <div style="margin-top: 10px;">${external_url}</div></p>
-
-                        //`;
+                        
                         
                     }
 
@@ -139,3 +127,140 @@ async function runCrawler() {
         button.textContent = 'Run Crawler';
     }
 }
+
+async function generateEmails() {
+    const button = document.getElementById('generatebutton');
+    const emailstatus = document.getElementById('emailstatus');
+    const emailResults = document.getElementById('emailResults');
+    const template = document.getElementById('template');
+
+    button.disabled=true;
+    button.textContent= ' Generating Email ... (this can take 2-3 minutes)';
+    emailstatus.className = 'loading';
+    emailstatus.textContent = 'Generating Personalised Emails Using Ollama';
+    emailResults.innerHTML='';
+
+    try {
+        const response = await fetch('/email-generator', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+
+            body: JSON.stringify({
+                template_type: template.value
+            })
+
+        });
+
+        const data = await response.json();
+
+        if(data.status =='success') {
+            emailstatus.className ='success';
+            emailstatus.textContent=` Generated ${data.count} emails`;
+            displayEmails(data.emails);
+        }
+        else {
+            emailstatus.className= 'error';
+            emailstatus.textContent='Error:' +data.message;
+        }
+    } 
+    catch (error) {
+        emailstatus.className ='error';
+        emailstatus.textContent='Error:' +error.message;
+    }
+    finally {
+        button.disabled=false;
+        button.textContent= 'Generate Emails';
+    }
+
+}
+
+function displayEmails(emails) {
+    const result = document.getElementById('emailResults');
+    let html = '';
+
+    emails.forEach((email, index) => {
+        html += `
+            <div class="email-card">
+                <div class="email-header">
+                    <h3> Email ${index +1}: ${email.name || 'Unkowwn'}</h3>
+                    <button onclick="sendEmail(${index})" class="btn-small>Send to inbox</button>
+                </div>
+                <div class="email-metadata">
+                    <p><strong> To:</strong> sandbox-${index +1}@test.local</p>
+                    <p><strong>From:</strong> ${email.sender} &lt;${email.name}&gt;</p>
+                    <p><strong> Subject:</strong> ${email.subject}</p>
+                </div>
+                <div class="email-body">
+                    <pre>${email.body}</pre>
+                </div>
+            </div>
+        `;
+    });
+    result.innerHTML = html;
+}
+
+async function sendEmail(index){
+    const sandboxedEmail = `sandox-${index+1}@test.local`;
+
+    try {
+        const response= await fetch('/send_email', {
+            method:'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                recipient: sandboxedEmail,
+                emailIndex: index
+            })
+        });
+
+        const data =await response.json();
+
+        if(data.status ==='success') {
+            alert(`email ${index+1} sent to ${sandboxedEmail}`);
+        }
+        else{
+            alert('Error: ' +data.message);
+        }
+        
+    } 
+    catch(error)
+    {
+        alert('Error sending email: ' +error.message);
+    }
+
+
+}
+
+
+//document.addEventListener('DOMContentLoaded', function() {
+
+    //if (!document.getElementById('crawler')) return;
+
+    //const savedScrape = localStorage.getItem('crawleroutput');
+    //const time = localStorage.getItem('crawlerTime');
+    
+    //if (savedScrape) {
+        //try {
+            //const data = JSON.parse(savedScrape);
+            //const status = document.getElementById('status');
+            
+            //if (time) {
+                //const date = new Date(time);
+                //status.className = 'success';
+                //status.textContent = `Crawler results from ${date.toLocaleString()}`;
+            //}
+        //let resultContainer = document.getElementById('text-results');
+        //if (!resultContainer) {
+            //const parent = document.getElementById('result');
+            //if (parent) {
+                //resultContainer = document.createElement('div');
+                //resultContainer.id = 'text-results';
+                //parent.appendChild(resultContainer)
+            //}
+        //}
+        //}
+    //}
+//})

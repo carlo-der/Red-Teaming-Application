@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Red Teaming Email Generator Application</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/css.css')}}">
+</head>
+<body>
+    <div class = "container">
+        <h1>Red Teaming Training Application</h1>
+        <p>Educational Tool for phishing simulation. For Cyber Security and Training Use ONLY</p>
+
+        <div class="grid">
+            <div class="option-card">
+                <h2>Web Crawler</h2>
+                <p>Use this tool to gather publically available information from the University of Brighton Website</p>
+                <a href="/crawler" class="button"> Open Crawler Page</a>
+            </div>
+            <div class="option-card">
+                <h2>Email Generator</h2>
+                <p>Use this tool to generate a personalised phishing email for Training Use ONLY</p>
+                <p>Note: Web Crawl must commence first to provide email automation with relevant information</p>
+                <a href="/email" class="button"> Open Email Generator</a>
+                
+            </div>
+        </div>
+
+        <div class="warning">
+            <p><strong><br>For Educational Use Only:</strong> This tool if for authorised security training exercises only. All Emails are sent to a secure, sanboxed inbox.<br></p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>This program has been created by Carlo de Retuerto for a final year project as a student at the University of Brighton.</p>
+        <p>Contact details and access to the code repository can be found here.</p>
+        <a href="https://github.com/carlo-der/Red-Teaming-Application" target="_blank">
+            <img src="/static/images/Github.png" alt="Github Profile" class="social">
+        </a>
+        <a href="www.linkedin.com/in/carlo-de-retuerto" target="_blank">
+            <img src="/static/images/linkedin.png" alt="LinkedIn Profile" class="social">
+        </a>
+        <a href="mailto:cdr29@uni.brighton.ac.uk" target="_blank">
+            <img src="/static/images/emaillogo2.png" alt="University Email Address" class="social">
+        </a>
+        
+    </div>
+</body>
+
+</html>
