@@ -2,11 +2,12 @@ from scrapy.spiders import Spider
 from scrapy.linkextractors import LinkExtractor
 import re
 import json
+import ollama
 
 class UniWebCrawler(Spider):
-    name = "project_crawler_ollama"
-    allowed_domains = ["brighton.ac.uk", "research.brighton.ac.uk"]
-    start_urls = ["https://www.brighton.ac.uk/courses/study/computer-science-with-cyber-security-bsc-hons.aspx"]
+    name = "project_crawler_ollama"  # name of the crawler
+    allowed_domains = ["brighton.ac.uk", "research.brighton.ac.uk"] # definition of domains that the crawler is restricted to
+    start_urls = ["https://www.brighton.ac.uk/courses/study/computer-science-with-cyber-security-bsc-hons.aspx"] #url that the crawler begins on
 
   
 
@@ -34,10 +35,9 @@ class UniWebCrawler(Spider):
 
     def parse(self, response):
 
-        import ollama #integration of ollama framework to find information from any course page
-        import json
+        
 
-        team_section = response.css('div.sys_span8')
+        team_section = response.css('div.sys_span8') # specific div that team section is stored in on university page
 
         if not team_section:
             team_section = response.css('main')
@@ -45,7 +45,7 @@ class UniWebCrawler(Spider):
         page_text = ' '.join(team_section.css('*::text').getall())
         cleaned_page_text = ' '.join(page_text.split())[:3000]
 
-        profile_links = team_section.css('a::attr(href)').getall()
+        profile_links = team_section.css('a::attr(href)').getall() # location of individual staff profile links
 
         correct_links = []
         for link in profile_links:
@@ -57,9 +57,9 @@ class UniWebCrawler(Spider):
         correct_links = list(set(correct_links))
 
         try:
-            result = ollama.chat(
-            model = 'llama3.2:1b',
-            messages=[
+            result = ollama.chat( # call to ollama to start scrape
+            model = 'llama3.2:3b', #definition of LLM used for scrape
+            messages=[             # instructions fed to LLM to ensure correct data is recieved
                 {
                     'role': 'system',
                     'content': 'You are a data extractor. Return ONLY valid JSON.'
@@ -75,7 +75,7 @@ class UniWebCrawler(Spider):
             
 
             raw_content = result['message']['content']
-
+            #ensures that JSON findings are converted into a string to be shown on webpage in a text format
             start = raw_content.find('{')
             end = raw_content.rfind('}') +1
 
@@ -111,11 +111,7 @@ class UniWebCrawler(Spider):
 
     def parse_staff_profile(self, response): #method to extract profile information
 
-        import ollama
-        
-        
-
-        extracted_info = {
+        extracted_info = { #definition of all information needed to be extracted for email generation
             'type': 'staff_profile',
             'url': response.url,
             'name': response.css('h1::text').get() or response.css('title::text').get(),
@@ -133,7 +129,7 @@ class UniWebCrawler(Spider):
 
 
         try:
-            result = ollama.chat(
+            result = ollama.chat( #call for LLM to find specified information within each staff profile field and produce JSON findings
                 model='llama3.2:1b',
                 messages=[{
                     'role': 'user',
@@ -160,9 +156,6 @@ Page content:
             elif '```' in response_info:
                 response_info = response_info.split('```')[1].split('```')[0]
 
-            ###extracted_info = json.loads(response_info.strip())
-            ##extracted_info['type'] = 'staff_profile'
-            #extracted_info['url'] = response.url
 
             ollama_data= json.loads(response_info.strip())
             extracted_info.update(ollama_data)
@@ -179,7 +172,7 @@ Page content:
 
         extracted_info['external_links'] = {}
 
-        all_links = response.css('a::attr(href)').getall()
+        all_links = response.css('a::attr(href)').getall() #finds all external links for each staff member and provides the links on the site
         for link in all_links:
             if not link:
                 continue

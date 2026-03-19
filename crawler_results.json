@@ -3,64 +3,32 @@
   "type": "course_summary",
   "url": "https://www.brighton.ac.uk/courses/study/computer-science-with-cyber-security-bsc-hons.aspx",
   "extracted_staff": [
-    {
-      "name": "Dr Michalis Pavlidis"
-    },
-    {
-      "name": "Dr Karl Cox"
-    },
-    {
-      "name": "Dr Goran Soldar"
-    },
-    {
-      "name": "Dr Nikolaos Polatidis"
-    },
-    {
-      "name": "Andrew Montgomery"
-    },
-    {
-      "name": "Jennie Harding"
-    }
+    "Dr Michalis Pavlidis"
   ],
   "links_found": 6
 },
 {
   "type": "staff_profile",
-  "url": "https://research.brighton.ac.uk/en/persons/jennie-harding/",
-  "name": "",
+  "url": "https://research.brighton.ac.uk/en/persons/goran-soldar/",
+  "name": "Goran Soldar",
   "job_title": null,
-  "email": "encryptedA(); brighton.ac encryptedDot(); uk 2023 2023",
+  "email": null,
   "phone": null,
   "research interests": [],
   "qualifications": [],
-  "job_name": "",
-  "research_interests": [],
   "external_links": {
-    "X": "https://twitter.com/intent/tweet?url=https://research.brighton.ac.uk/en/persons/jennie-harding/%3Futm_source%3Dtwitter%26utm_medium%3Dsocial%26utm_campaign%3Dsharelink&text=Check+out+this+researcher+at+The+University+of+Brighton%3A+Jennie+Harding"
+    "X": "https://twitter.com/intent/tweet?url=https://research.brighton.ac.uk/en/persons/goran-soldar/%3Futm_source%3Dtwitter%26utm_medium%3Dsocial%26utm_campaign%3Dsharelink&text=Check+out+this+researcher+at+The+University+of+Brighton%3A+Goran+Soldar"
   }
 },
 {
   "type": "staff_profile",
   "url": "https://research.brighton.ac.uk/en/persons/michalis-pavlidis/",
-  "name": null,
+  "name": "Michalis Pavlidis",
   "job_title": null,
-  "email": "encryptedA(); brighton.ac encryptedDot(); uk 2003 2025 Research activity per year",
+  "email": null,
   "phone": null,
   "research interests": [],
-  "qualifications": [
-    "PhD in secure software engineering from UEL",
-    "MSc in Internet Systems Engineering from UEL",
-    "BSc degree in Information Technology from Technological Educational Institute of Thessaloniki, Greece",
-    "Supervised Work (5)",
-    "Knowledge exchange as academic supervisor for 3 year KTP project"
-  ],
-  "job_name": "Principal Lecturer",
-  "research_interests": [
-    "Cyber Threat Intelligence (CTI)",
-    "Artificial Intelligence (AI) for Cyber Security",
-    "Threat Modeling",
-    "Security Requirements Engineering"
-  ],
+  "qualifications": [],
   "external_links": {
     "linkedin": "https://www.linkedin.com/in/mpavlidis/",
     "X": "https://twitter.com/intent/tweet?url=https://research.brighton.ac.uk/en/persons/michalis-pavlidis/%3Futm_source%3Dtwitter%26utm_medium%3Dsocial%26utm_campaign%3Dsharelink&text=Check+out+this+researcher+at+The+University+of+Brighton%3A+Michalis+Pavlidis",
@@ -70,27 +38,45 @@
 },
 {
   "type": "staff_profile",
-  "url": "https://research.brighton.ac.uk/en/persons/goran-soldar/",
-  "name": null,
+  "url": "https://research.brighton.ac.uk/en/persons/karl-cox/",
+  "name": "Karl Cox",
   "job_title": null,
   "email": "encryptedA(); brighton.ac encryptedDot(); uk",
   "phone": null,
   "research interests": [],
   "qualifications": [
-    "PhD",
-    "MSc",
-    "BSc (Hons)"
+    "Requirements Engineering",
+    "Computer Science"
+  ],
+  "job_name": "Senior Lecturer",
+  "research_interests": [
+    "Similar Profiles",
+    "Supervised Work",
+    "Security Requirements"
+  ],
+  "external_links": {
+    "X": "https://twitter.com/intent/tweet?url=https://research.brighton.ac.uk/en/persons/karl-cox/%3Futm_source%3Dtwitter%26utm_medium%3Dsocial%26utm_campaign%3Dsharelink&text=Check+out+this+researcher+at+The+University+of+Brighton%3A+Karl+Cox"
+  }
+},
+{
+  "type": "staff_profile",
+  "url": "https://research.brighton.ac.uk/en/persons/andrew-montgomery/",
+  "name": null,
+  "job_title": null,
+  "email": null,
+  "phone": null,
+  "research interests": [],
+  "qualifications": [
+    "Bachelor's degree"
   ],
   "job_name": null,
   "research_interests": [
-    "Information Systems",
-    "Data Semantics",
-    "Machine Learning",
-    "Software Engineerinng",
-    "Computer Systems"
+    "AI",
+    "legal practice",
+    "family law"
   ],
   "external_links": {
-    "X": "https://twitter.com/intent/tweet?url=https://research.brighton.ac.uk/en/persons/goran-soldar/%3Futm_source%3Dtwitter%26utm_medium%3Dsocial%26utm_campaign%3Dsharelink&text=Check+out+this+researcher+at+The+University+of+Brighton%3A+Goran+Soldar"
+    "X": "https://twitter.com/intent/tweet?url=https://research.brighton.ac.uk/en/persons/andrew-montgomery/%3Futm_source%3Dtwitter%26utm_medium%3Dsocial%26utm_campaign%3Dsharelink&text=Check+out+this+researcher+at+The+University+of+Brighton%3A+Andrew+Montgomery"
   }
 },
 {
@@ -98,13 +84,13 @@
   "url": "https://research.brighton.ac.uk/en/persons/nick-polatidis/",
   "name": null,
   "job_title": null,
-  "email": "encryptedA(); brighton.ac encryptedDot(); uk",
+  "email": null,
   "phone": null,
   "research interests": [],
   "qualifications": [
-    "PhD in Applied Informatics from the University of Macedonia (Greece)",
-    "MSc in Internet Software Systems from the University of Birmingham",
-    "BSc (Hons) from Heriot-Watt University"
+    "BSc (Hons)",
+    "MSc in Internet Software Systems",
+    "PhD in Applied Informatics"
   ],
   "job_name": null,
   "research_interests": [
@@ -120,42 +106,23 @@
 },
 {
   "type": "staff_profile",
-  "url": "https://research.brighton.ac.uk/en/persons/andrew-montgomery/",
+  "url": "https://research.brighton.ac.uk/en/persons/jennie-harding/",
   "name": null,
   "job_title": null,
-  "email": "encryptedA(); brighton.ac encryptedDot();",
-  "phone": "",
+  "email": "J.Harding3@brighton.ac.uk",
+  "phone": "+44 1252 887987",
   "research interests": [],
   "qualifications": [
-    "KTP: Putting AI to work in legal practice"
-  ],
-  "job_name": null,
-  "research_interests": [
-    "AI"
-  ],
-  "external_links": {
-    "X": "https://twitter.com/intent/tweet?url=https://research.brighton.ac.uk/en/persons/andrew-montgomery/%3Futm_source%3Dtwitter%26utm_medium%3Dsocial%26utm_campaign%3Dsharelink&text=Check+out+this+researcher+at+The+University+of+Brighton%3A+Andrew+Montgomery"
-  }
-},
-{
-  "type": "staff_profile",
-  "url": "https://research.brighton.ac.uk/en/persons/karl-cox/",
-  "name": "Karl Cox",
-  "job_title": null,
-  "email": "",
-  "phone": null,
-  "research interests": [],
-  "qualifications": [
-    "PhD",
-    "BSc (Hons)"
+    "Ph.D. in Computer Science"
   ],
   "job_name": "Senior Lecturer",
   "research_interests": [
-    "Requirement Engineering",
-    "Computer Science"
+    "Keratoconus",
+    "Non-specialist ophthalmologists",
+    "Intraocular Lens"
   ],
   "external_links": {
-    "X": "https://twitter.com/intent/tweet?url=https://research.brighton.ac.uk/en/persons/karl-cox/%3Futm_source%3Dtwitter%26utm_medium%3Dsocial%26utm_campaign%3Dsharelink&text=Check+out+this+researcher+at+The+University+of+Brighton%3A+Karl+Cox"
+    "X": "https://twitter.com/intent/tweet?url=https://research.brighton.ac.uk/en/persons/jennie-harding/%3Futm_source%3Dtwitter%26utm_medium%3Dsocial%26utm_campaign%3Dsharelink&text=Check+out+this+researcher+at+The+University+of+Brighton%3A+Jennie+Harding"
   }
 }
 ]

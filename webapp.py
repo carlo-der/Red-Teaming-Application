@@ -212,8 +212,8 @@ Wrire a realistic {template_type} email that is clearly simulated and shows comm
 CRITICAL: Return ONLY valid JSON with no extra text before or after. All strings must use double quotes and add commas between all fields. {{
     "subject": "an email subject about {template_type}
     "body": "the actual email text goes here, 2-3 paragraphs. Use actual line breaks, do not use \\n or anything similar.
-    "sender_name": "example IT staff name"
-    "sender_email": "a realistic email address like john.smith@hr.com"
+    "sender_name": "example IT staff name. Use a real sounding first and last name for this."
+    "sender_email": "a realistic email address that uses the made up first and last name."
 }}
 
 Rules:

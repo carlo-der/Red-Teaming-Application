@@ -6,20 +6,23 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #08203e 0%, #557c93 100%);
     min-height: 100vh;
     padding:20px;
     color: #333;
+    
 }
 
 .container {
     max-width: auto;
     max-height: auto;
+    min-height: 600px;
     margin-bottom: 15px;
     background-color: white;
     border-radius: 15px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
     padding: 40px;
+    
 }
 
 h1 {
@@ -76,7 +79,7 @@ button:disabled {
 }
 
 .button {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #08203e 0%, #557c93 100%);
     color: white;
     padding: 15px 30px;
     font-size: 16px;
@@ -92,15 +95,58 @@ button:disabled {
 .footer{
     max-width: auto;
     max-height: auto;
-    margin-bottom: 30px;
+    margin-top: auto;
     background-color: white;
     border-radius: 15px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
     padding: 40px;
+    
+    bottom: 5px;
+    left: 20px;
+    right: 20px;
+    
 
 }
 
 .social {
     max-width: 75px;
     max-height: 75px;
+}
+
+select {
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+
+.back {
+    background: linear-gradient(135deg, #08203e 0%, #557c93 100%);
+    color: white;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    display: inline-block;
+    
+} 
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.email-card {
+    background: linear-gradient(135deg, #08203e 0%, #557c93 100%);
+    color:white;
+    font-size: 16px;
+}
+
+.email-body {
+        overflow-wrap: break-word;
+        word-wrap: break word;
 }

@@ -35,81 +35,82 @@ async function runCrawler() {
 
             localStorage.setItem('crawleroutput', JSON.stringify(data.data));
             localStorage.setItem('crawlerTime', new Date().toISOString());
+            displayCrawlerFindings(data.data);
             
-            let resultContainer = document.getElementById('text-results');
+            //let resultContainer = document.getElementById('text-results');
 
-            if(!resultContainer)
-                {
-                    const parent =document.getElementById('result');
-                    if (parent)
-                        {
-                            resultContainer= document.createElement('div');
-                            resultContainer.id = 'text-results';
-                            parent.appendChild(resultContainer);
-                        }
-                        else{
-                            console.error("nothing found");
-                            return;
-                        }
+            //if(!resultContainer)
+                //{
+                    //const parent =document.getElementById('result');
+                    //if (parent)
+                        //{
+                           //resultContainer= document.createElement('div');
+                            //resultContainer.id = 'text-results';
+                            //parent.appendChild(resultContainer);
+                        //}
+                        //else{
+                            //console.error("nothing found");
+                            //return;
+                        //}
 
-                }
+             //   /}
 
-            resultContainer.innerHTML='';
+            //resultContainer.innerHTML='';
 
-            data.data.forEach(item => {
+            //data.data.forEach(item => {
 
                 
 
-                const card = document.createElement('div');
-                card.classList.add('crawler');
+               // const card = document.createElement('div');
+                //card.classList.add('crawler');
 
-                if (item.type === 'course_summary') {
-                    card.classList.add('type_course');
-                    card.innerHTML =`
-                    <h2>Course Scanned</h2>
-                    <p><strong>URL:</strong> <a href="${item.url}" target="_blank">${item.url}</a></p>
-                    <p><strong>Names:</strong> ${item.extracted_staff.map(s => s.name).join(', ')}</p>
+                //if (item.type === 'course_summary') {
+                  //  card.classList.add('type_course');
+                    //card.innerHTML =`
+                    //<h2>Course Scanned</h2>
+                    //<p><strong>URL:</strong> <a href="${item.url}" target="_blank">${item.url}</a></p>
+                    //<p><strong>Names:</strong> ${item.extracted_staff.map(s => s.name).join(', ')}</p>
                     
                     
-                    `;
+                    //`;
 
 
-                }
-                else if (item.type === 'staff_profile')
-                    {
-                        card.classList.add('type_staff');
-                        const name = item.name||'Name not found';
-                        const jobTitle = item.job_title || item.job_name || 'N/A';
-                        const email = (item.email && !item.email.includes('encrypted')) ? item.email : 'Not available';
-                        const interests = item.research_interests && item.research_interests.length >0 ? item.research_interests.filter(i => i).map(interest => `<li>${interest}</li>`).join('') : '<li>None Listed</li>';
-                        const qualifList = item.qualifications && item.qualifications.length >0 ? item.qualifications.filter(q => q).map(q => `<li>${q}</li>`).join(''): `<li>None Listed</li>`;
-                        const externalLinks= item.external_links && Object.keys(item.external_links).length>0 ? Object.entries(item.external_links).map(([platform, url]) => `<a href="${url}" target="_blank">${platform}</a>`).join(' | '): 'No External Links Found';
+                //}
+                //else if (item.type === 'staff_profile')
+                  //  {
+                    //    card.classList.add('type_staff');
+                      //  const name = item.name||'Name not found';
+                        //const jobTitle = item.job_title || item.job_name || 'N/A';
+                        //const email = (item.email && !item.email.includes('encrypted')) ? item.email : 'Not available';
+                        //const interests = item.research_interests && item.research_interests.length >0 ? item.research_interests.filter(i => i).map(interest => `<li>${interest}</li>`).join('') : '<li>None Listed</li>';
+                        //const qualifList = item.qualifications && item.qualifications.length >0 ? item.qualifications.filter(q => q).map(q => `<li>${q}</li>`).join(''): `<li>None Listed</li>`;
+                        //const externalLinks= item.external_links && Object.keys(item.external_links).length>0 ? Object.entries(item.external_links).map(([platform, url]) => `<a href="${url}" target="_blank">${platform}</a>`).join(' | '): 'No External Links Found';
 
-                        card.innerHTML =`
-                        <h3>${name}</h3>
-                        <p><strong>Job Title:</strong> ${jobTitle}</p>
-                        <p><strong>Email:</strong>${email}</p>
-                        <p><strong>Profile URL:</strong>${item.url}</p>
-                        <p><strong>Research Interests</strong></p>
-                        <ul>${interests}</ul>
-                        <p><strong>Qualifications</strong></p>
-                        <ul>${qualifList}</ul>
-                        <p><strong>External Links:</strong></p>
-                        <div>${externalLinks}</div>
-
-                        
-                        `;
-
+                        //card.innerHTML =`
+                        //<h3>${name}</h3>
+                        //<p><strong>Job Title:</strong> ${jobTitle}</p>
+                        //<p><strong>Email:</strong>${email}</p>
+                        //<p><strong>Profile URL:</strong>${item.url}</p>
+                        //<p><strong>Research Interests</strong></p>
+                        //<ul>${interests}</ul>
+                        //<p><strong>Qualifications</strong></p>
+                        //<ul>${qualifList}</ul>
+                        //<p><strong>External Links:</strong></p>
+                        //<div>${externalLinks}</div>
 
                         
-                        
-                    }
+                        //`;
 
-                    resultContainer.appendChild(card);
+
+                        
+                        
+                    //}
+
+                    //resultContainer.appendChild(card);
 
                     
                 
-            });
+            //});
 
             
         }
@@ -158,6 +159,9 @@ async function generateEmails() {
         if(data.status =='success') {
             emailstatus.className ='success';
             emailstatus.textContent=` Generated ${data.count} emails`;
+            localStorage.setItem('generatedemails', JSON.stringify(data.emails));
+            localStorage.setItem('time', new Date(). toISOString());
+
             displayEmails(data.emails);
         }
         else {
@@ -184,7 +188,7 @@ function displayEmails(emails) {
         html += `
             <div class="email-card">
                 <div class="email-header">
-                    <h3> Email ${index +1}: ${email.name || 'Unkowwn'}</h3>
+                    <h3> Email ${index +1}: ${email.name || 'Unknown'}</h3>
                     <button onclick="sendEmail(${index})" class="btn-small>Send to inbox</button>
                 </div>
                 <div class="email-metadata">
@@ -235,32 +239,119 @@ async function sendEmail(index){
 }
 
 
-//document.addEventListener('DOMContentLoaded', function() {
+function displayCrawlerFindings(data){
+    let resultContainer = document.getElementById('text-results');
 
-    //if (!document.getElementById('crawler')) return;
+    if(!resultContainer)
+        {
+            const parent =document.getElementById('result');
+            if (parent)
+                {
+                    resultContainer= document.createElement('div');
+                    resultContainer.id = 'text-results';
+                    parent.appendChild(resultContainer);
+                }
+                else{
+                    console.error("nothing found");
+                    return;
+                }
 
-    //const savedScrape = localStorage.getItem('crawleroutput');
-    //const time = localStorage.getItem('crawlerTime');
-    
-    //if (savedScrape) {
-        //try {
-            //const data = JSON.parse(savedScrape);
-            //const status = document.getElementById('status');
+        }
+
+    resultContainer.innerHTML='';
+
+    data.forEach(item => {
+
+        
+
+        const card = document.createElement('div');
+        card.classList.add('crawler');
+
+        if (item.type === 'course_summary') {
+            card.classList.add('type_course');
+            card.innerHTML =`
+            <h2>Course Scanned</h2>
+            <p><strong>URL:</strong> <a href="${item.url}" target="_blank">${item.url}</a></p>
+            <p><strong>Names:</strong> ${item.extracted_staff.map(s => s.name).join(', ')}</p>
             
-            //if (time) {
-                //const date = new Date(time);
-                //status.className = 'success';
-                //status.textContent = `Crawler results from ${date.toLocaleString()}`;
-            //}
-        //let resultContainer = document.getElementById('text-results');
-        //if (!resultContainer) {
-            //const parent = document.getElementById('result');
-            //if (parent) {
-                //resultContainer = document.createElement('div');
-                //resultContainer.id = 'text-results';
-                //parent.appendChild(resultContainer)
-            //}
-        //}
-        //}
-    //}
-//})
+            
+            `;
+
+
+        }
+        else if (item.type === 'staff_profile')
+            {
+                card.classList.add('type_staff');
+                const name = item.name||'Name not found';
+                const jobTitle = item.job_title || item.job_name || 'N/A';
+                const email = (item.email && !item.email.includes('encrypted')) ? item.email : 'Not available';
+                const interests = item.research_interests && item.research_interests.length >0 ? item.research_interests.filter(i => i).map(interest => `<li>${interest}</li>`).join('') : '<li>None Listed</li>';
+                const qualifList = item.qualifications && item.qualifications.length >0 ? item.qualifications.filter(q => q).map(q => `<li>${q}</li>`).join(''): `<li>None Listed</li>`;
+                const externalLinks= item.external_links && Object.keys(item.external_links).length>0 ? Object.entries(item.external_links).map(([platform, url]) => `<a href="${url}" target="_blank">${platform}</a>`).join(' | '): 'No External Links Found';
+
+                card.innerHTML =`
+                <h3>${name}</h3>
+                <p><strong>Job Title:</strong> ${jobTitle}</p>
+                <p><strong>Email:</strong>${email}</p>
+                <p><strong>Profile URL:</strong>${item.url}</p>
+                <p><strong>Research Interests</strong></p>
+                <ul>${interests}</ul>
+                <p><strong>Qualifications</strong></p>
+                <ul>${qualifList}</ul>
+                <p><strong>External Links:</strong></p>
+                <div>${externalLinks}</div>
+
+                
+                `;
+
+
+                
+                
+            }
+
+            resultContainer.appendChild(card);
+
+            
+        
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+
+    if(!document.getElementById('crawler')) return;
+
+    const savedScrape = localStorage.getItem('crawleroutput');
+    const time = localStorage.getItem('crawlerTime');
+
+    if (savedScrape) {
+        const data = JSON.parse(savedScrape);
+        const status = document.getElementById('status');
+        if (time) {
+            const date = new Date(time);
+            status.className='success';
+            status.textContent=`Crawler results from ${date.toLocaleString()}`;
+        }
+
+        displayCrawlerFindings(data);
+    }
+})
+
+document.addEventListener('DOMContentLoaded', function(){
+
+    if(!document.getElementById('generatebutton')) return;
+
+    const savedemails = localStorage.getItem('generatedmails');
+    const time = localStorage.getItem('time');
+
+    if (savedemails) {
+        const emails = JSON.parse(savedemails);
+        const status = document.getElementById('status');
+        if (time) {
+            const date = new Date(time);
+            status.className='success';
+            status.textContent=`${emails.length} emails generated on ${date.toLocaleString()}`;
+        }
+
+        displayEmails(emails);
+    }
+})
