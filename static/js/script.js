@@ -1,13 +1,13 @@
 
 
 async function runCrawler() {
-    const button = document.getElementById('crawler');
-    const status = document.getElementById('status');
-    const result = document.getElementById('text-results');
+    const button = document.getElementById('crawler'); // run crawler button
+    const status = document.getElementById('status'); // crawler status is shown
+    const result = document.getElementById('text-results'); //this is where the scraped results are stored
 
 
     button.disabled = true;
-    button.textContent = 'Crawl in progress. This may take 3-5 minutes';
+    button.textContent = 'Crawl in progress. This may take 3-5 minutes'; // this disables the button after it is clicked to ensure that only 1 crawl can be run at a time
     status.className= 'loading';
     status.textContent = 'Crawler is running. Please wait';
     result.innerHTML = '';
@@ -33,90 +33,15 @@ async function runCrawler() {
                 return;
             }
 
-            localStorage.setItem('crawleroutput', JSON.stringify(data.data));
+            localStorage.setItem('crawleroutput', JSON.stringify(data.data)); // saves the data locally for each session to allow users to see the crawled info if they reload the page
             localStorage.setItem('crawlerTime', new Date().toISOString());
             displayCrawlerFindings(data.data);
-            
-            //let resultContainer = document.getElementById('text-results');
-
-            //if(!resultContainer)
-                //{
-                    //const parent =document.getElementById('result');
-                    //if (parent)
-                        //{
-                           //resultContainer= document.createElement('div');
-                            //resultContainer.id = 'text-results';
-                            //parent.appendChild(resultContainer);
-                        //}
-                        //else{
-                            //console.error("nothing found");
-                            //return;
-                        //}
-
-             //   /}
-
-            //resultContainer.innerHTML='';
-
-            //data.data.forEach(item => {
-
-                
-
-               // const card = document.createElement('div');
-                //card.classList.add('crawler');
-
-                //if (item.type === 'course_summary') {
-                  //  card.classList.add('type_course');
-                    //card.innerHTML =`
-                    //<h2>Course Scanned</h2>
-                    //<p><strong>URL:</strong> <a href="${item.url}" target="_blank">${item.url}</a></p>
-                    //<p><strong>Names:</strong> ${item.extracted_staff.map(s => s.name).join(', ')}</p>
-                    
-                    
-                    //`;
-
-
-                //}
-                //else if (item.type === 'staff_profile')
-                  //  {
-                    //    card.classList.add('type_staff');
-                      //  const name = item.name||'Name not found';
-                        //const jobTitle = item.job_title || item.job_name || 'N/A';
-                        //const email = (item.email && !item.email.includes('encrypted')) ? item.email : 'Not available';
-                        //const interests = item.research_interests && item.research_interests.length >0 ? item.research_interests.filter(i => i).map(interest => `<li>${interest}</li>`).join('') : '<li>None Listed</li>';
-                        //const qualifList = item.qualifications && item.qualifications.length >0 ? item.qualifications.filter(q => q).map(q => `<li>${q}</li>`).join(''): `<li>None Listed</li>`;
-                        //const externalLinks= item.external_links && Object.keys(item.external_links).length>0 ? Object.entries(item.external_links).map(([platform, url]) => `<a href="${url}" target="_blank">${platform}</a>`).join(' | '): 'No External Links Found';
-
-                        //card.innerHTML =`
-                        //<h3>${name}</h3>
-                        //<p><strong>Job Title:</strong> ${jobTitle}</p>
-                        //<p><strong>Email:</strong>${email}</p>
-                        //<p><strong>Profile URL:</strong>${item.url}</p>
-                        //<p><strong>Research Interests</strong></p>
-                        //<ul>${interests}</ul>
-                        //<p><strong>Qualifications</strong></p>
-                        //<ul>${qualifList}</ul>
-                        //<p><strong>External Links:</strong></p>
-                        //<div>${externalLinks}</div>
-
-                        
-                        //`;
-
-
-                        
-                        
-                    //}
-
-                    //resultContainer.appendChild(card);
-
-                    
-                
-            //});
 
             
         }
         else {
             status.className = 'error';
-            status.textContent = 'Error: ' + data.message;
+            status.textContent = 'Error: ' + data.message; 
         }
     } catch (error) {
         status.className = 'error';
@@ -125,7 +50,7 @@ async function runCrawler() {
     }
     finally {
         button.disabled = false;
-        button.textContent = 'Run Crawler';
+        button.textContent = 'Run Crawler'; // enables to button to be clicked again after the crawl has been run 
     }
 }
 
@@ -189,12 +114,12 @@ function displayEmails(emails) {
             <div class="email-card">
                 <div class="email-header">
                     <h3> Email ${index +1}: ${email.name || 'Unknown'}</h3>
-                    <button onclick="sendEmail(${index})" class="btn-small>Send to inbox</button>
+                    <button onclick="sendEmail(${index})" class="btn-small">Send to inbox</button>
                 </div>
                 <div class="email-metadata">
-                    <p><strong> To:</strong> sandbox-${index +1}@test.local</p>
-                    <p><strong>From:</strong> ${email.sender} &lt;${email.name}&gt;</p>
-                    <p><strong> Subject:</strong> ${email.subject}</p>
+                    <p class="para"><strong> To:</strong> sandbox-${index +1}@test.local</p>
+                    <p class="para"><strong>From:</strong> ${email.sender} &lt;${email.name}&gt;</p>
+                    <p class="para"><strong> Subject:</strong> ${email.subject}</p>
                 </div>
                 <div class="email-body">
                     <pre>${email.body}</pre>
@@ -240,7 +165,7 @@ async function sendEmail(index){
 
 
 function displayCrawlerFindings(data){
-    let resultContainer = document.getElementById('text-results');
+    let resultContainer = document.getElementById('text-results'); //creation of a container to store data once scraped
 
     if(!resultContainer)
         {
@@ -252,7 +177,7 @@ function displayCrawlerFindings(data){
                     parent.appendChild(resultContainer);
                 }
                 else{
-                    console.error("nothing found");
+                    console.error("nothing found"); // error return if no information has beens scraped
                     return;
                 }
 
@@ -270,9 +195,9 @@ function displayCrawlerFindings(data){
         if (item.type === 'course_summary') {
             card.classList.add('type_course');
             card.innerHTML =`
-            <h2>Course Scanned</h2>
-            <p><strong>URL:</strong> <a href="${item.url}" target="_blank">${item.url}</a></p>
-            <p><strong>Names:</strong> ${item.extracted_staff.map(s => s.name).join(', ')}</p>
+            <h2 class="course-scanned">Course Scanned</h2>
+            <p class="para"><strong>URL:</strong> <a href="${item.url}" target="_blank">${item.url}</a></p>
+            <p class="para"><strong>Names:</strong> ${item.extracted_staff.map(s => s.name).join(', ')}</p>
             
             
             `;
@@ -288,17 +213,18 @@ function displayCrawlerFindings(data){
                 const interests = item.research_interests && item.research_interests.length >0 ? item.research_interests.filter(i => i).map(interest => `<li>${interest}</li>`).join('') : '<li>None Listed</li>';
                 const qualifList = item.qualifications && item.qualifications.length >0 ? item.qualifications.filter(q => q).map(q => `<li>${q}</li>`).join(''): `<li>None Listed</li>`;
                 const externalLinks= item.external_links && Object.keys(item.external_links).length>0 ? Object.entries(item.external_links).map(([platform, url]) => `<a href="${url}" target="_blank">${platform}</a>`).join(' | '): 'No External Links Found';
-
-                card.innerHTML =`
+                
+                // html formatting of the results
+                card.innerHTML =` 
                 <h3>${name}</h3>
-                <p><strong>Job Title:</strong> ${jobTitle}</p>
-                <p><strong>Email:</strong>${email}</p>
-                <p><strong>Profile URL:</strong>${item.url}</p>
-                <p><strong>Research Interests</strong></p>
+                <p class="para"><strong>Job Title:</strong> ${jobTitle}</p>
+                <p class="para"><strong>Email:</strong>${email}</p>
+                <p class="para"><strong>Profile URL:</strong>${item.url}</p>
+                <p class="para"><strong>Research Interests</strong></p>
                 <ul>${interests}</ul>
-                <p><strong>Qualifications</strong></p>
+                <p class="para"><strong>Qualifications</strong></p>
                 <ul>${qualifList}</ul>
-                <p><strong>External Links:</strong></p>
+                <p class="para"><strong>External Links:</strong></p>
                 <div>${externalLinks}</div>
 
                 
@@ -340,12 +266,12 @@ document.addEventListener('DOMContentLoaded', function(){
 
     if(!document.getElementById('generatebutton')) return;
 
-    const savedemails = localStorage.getItem('generatedmails');
+    const savedemails = localStorage.getItem('generatedemails');
     const time = localStorage.getItem('time');
 
     if (savedemails) {
         const emails = JSON.parse(savedemails);
-        const status = document.getElementById('status');
+        const status = document.getElementById('emailstatus');
         if (time) {
             const date = new Date(time);
             status.className='success';

@@ -14,15 +14,15 @@
         <p>Generate personalised phishing emails for simulation based on scraped data</p>
 
         <div class="email-options">
-            <h3>Select Email Type</h3>
-            <select id="template">
+            <h3 class="select-email">Select Email Type</h3>
+            <select class="button" id="template">
                 <option value="urgent">Urgent IT Security Email</option>
                 <option value="research">Research Collaboration</option>
                 <option value="conference">Conference Opportunity</option>
                 <option value="grant">Grant Opportunity</option>
             </select>
 
-            <button id="generatebutton" onclick="generateEmails()"> Generate Emails</button>
+            <button class="button" id="generatebutton" onclick="generateEmails()"> Generate Emails</button>
         </div>
 
         <div id="emailstatus"></div>

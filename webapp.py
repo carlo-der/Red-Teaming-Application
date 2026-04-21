@@ -245,11 +245,6 @@ Write the ACTUAL email content with no placeholders. Please remember that this i
         print(f"raw ollama response for {name}:")
         print(response_text)
         print("="*60)
-
-
-        
-        
-
         
 
         email_data = json.loads(response_text)

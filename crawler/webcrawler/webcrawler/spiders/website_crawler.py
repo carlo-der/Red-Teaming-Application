@@ -12,22 +12,22 @@ class UniWebCrawler(Spider):
   
 
     custom_settings = {
-        'DOWNLOAD_DELAY': 3.0, # leaves 2 seconds between requests to webpage
+        'DOWNLOAD_DELAY': 3.0, # leaves 3 seconds between requests to webpage to ensure the server does not get overloaded
         'CONCURRENT_REQUESTS': 1, # ensures only 1 request happens at a time
         'ROBOTSTXT_OBEY': True, # ensures crawler respects robots.txt
-        'RANDOMIZE_DOWNLOAD_DELAY': True,
-        "COOKIES_ENABLED": False,
-        'USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'DEFAULT_REQUEST_HEADERS': {
+        
+        "COOKIES_ENABLED": False, # avoids creating active sessions whilst scraping
+        
+        'DEFAULT_REQUEST_HEADERS': { # helps the crawler to identify which types of information it will be scraping
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
             'Accept-Language': 'en',
             'Connection': 'keep-alive',
             'Cache-Control': 'max-age=0',
         },
-        'HTTPCACHE_ENABLED': False,
-        'DUPEFILTER_CLASS': 'scrapy.dupefilters.BaseDupeFilter',
-        'FEED_FORMAT': 'json',
-        'FEED_EXPORT_INDENT': 2
+        'HTTPCACHE_ENABLED': False, # disables cache so that the crawler always scraped the most up to date information
+        'DUPEFILTER_CLASS': 'scrapy.dupefilters.BaseDupeFilter', # allows the crawler to visit the same URL again
+        'FEED_FORMAT': 'json', # explicitly defines the output format to help with generator information retrieval
+        'FEED_EXPORT_INDENT': 2 # allows easier reading of JSON content for debugging and testing
         
     }
 
@@ -70,7 +70,7 @@ class UniWebCrawler(Spider):
                 }
 
             ],
-            options={'temperature': 0}
+            options={'temperature': 0} # ensures that the LLM will use more likely words, helps outputs to stay sounding professional
             )
             
 
@@ -173,7 +173,7 @@ Page content:
         extracted_info['external_links'] = {}
 
         all_links = response.css('a::attr(href)').getall() #finds all external links for each staff member and provides the links on the site
-        for link in all_links:
+        for link in all_links:                             #this is done manually rather than through LLM use
             if not link:
                 continue
             link_lower = link.lower()
