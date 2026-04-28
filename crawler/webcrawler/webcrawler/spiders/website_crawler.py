@@ -58,7 +58,7 @@ class UniWebCrawler(Spider):
 
         try:
             result = ollama.chat( # call to ollama to start scrape
-            model = 'llama3.2:3b', #definition of LLM used for scrape
+            model = 'llama3.2:1b', #definition of LLM used for scrape
             messages=[             # instructions fed to LLM to ensure correct data is recieved
                 {
                     'role': 'system',

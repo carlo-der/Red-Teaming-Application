@@ -197,22 +197,107 @@ def phishing_email(profile, template_type):
 
     templates ={
         'urgent': f"""You are helping to create educational training content for an authorised university project foucsing on cybersecurity awareness.
-TASK: write a simulated urgent IT security email that will be used ONLY for the training of staff and personel to recognise possible phishing attemps.
+TASK: write a simulated urgent IT security email that will be used ONLY for the training of staff and personel to recognise possible phishing attempts.
 
 Training participant name: {name}
 Their research interests: {interests}
 Email type: {template_type}
 
-Wrire a realistic {template_type} email that is clearly simulated and shows common phishing tactics. the email must:
+Write a realistic {template_type} email that is clearly simulated and shows common phishing tactics. the email must:
 1. Addresses {name} personally.
 2. Creates a sense of urgency relating to account security
 3. Includes a suspicious link [PHISHING__SIMULATION_LINK]
 4. is 2-3 paragraphs long demonstrating typical phishing language patterns
 
 CRITICAL: Return ONLY valid JSON with no extra text before or after. All strings must use double quotes and add commas between all fields. {{
-    "subject": "an email subject about {template_type}
-    "body": "the actual email text goes here, 2-3 paragraphs. Use actual line breaks, do not use \\n or anything similar.
-    "sender_name": "example IT staff name. Use a real sounding first and last name for this."
+    "subject": "an email subject about {template_type}",
+    "body": "the actual email text goes here, 2-3 paragraphs. Use actual line breaks, do not use \\n or anything similar.",
+    "sender_name": "example IT staff name. Use a real sounding first and last name for this.",
+    "sender_email": "a realistic email address that uses the made up first and last name."
+}}
+
+Rules:
+1. No trailing commas
+2. Use double quotes for all strings
+3. Put commas afte every field except the last
+4. Return ONLY the JSON object, nothing else
+
+Write the ACTUAL email content with no placeholders. Please remember that this is educational material not actual phishing.""",
+
+        'conference': f"""You are helping to create educational training content for an authorised university project foucsing on cybersecurity awareness.
+TASK: write a simulated IT security email containing an invitation to a conference that will be used ONLY for the training of staff and personel to recognise possible phishing attempts.
+
+Training participant name: {name}
+Their research interests: {interests}
+Email type: {template_type}
+
+Write a realistic {template_type} email that is clearly simulated and shows common phishing tactics. the email must:
+1. Addresses {name} personally.
+2. Creates a sense of urgency relating to account security
+3. Includes a suspicious link [PHISHING__SIMULATION_LINK]
+4. is 2-3 paragraphs long demonstrating typical phishing language patterns
+
+CRITICAL: Return ONLY valid JSON with no extra text before or after. All strings must use double quotes and add commas between all fields. {{
+    "subject": "an email subject about {template_type}",
+    "body": "the actual email text goes here, 2-3 paragraphs. Use actual line breaks, do not use \\n or anything similar.",
+    "sender_name": "example IT staff name. Use a real sounding first and last name for this.",
+    "sender_email": "a realistic email address that uses the made up first and last name."
+}}
+
+Rules:
+1. No trailing commas
+2. Use double quotes for all strings
+3. Put commas afte every field except the last
+4. Return ONLY the JSON object, nothing else
+
+Write the ACTUAL email content with no placeholders. Please remember that this is educational material not actual phishing.""",
+
+        'research collaboration': f"""You are helping to create educational training content for an authorised university project foucsing on cybersecurity awareness.
+TASK: write a simulated IT security email containing the opportunity to take part in a research collaboration that will be used ONLY for the training of staff and personel to recognise possible phishing attempts.
+
+Training participant name: {name}
+Their research interests: {interests}
+Email type: {template_type}
+
+Write a realistic {template_type} email that is clearly simulated and shows common phishing tactics. the email must:
+1. Addresses {name} personally.
+2. Creates a sense of urgency relating to account security
+3. Includes a suspicious link [PHISHING__SIMULATION_LINK]
+4. is 2-3 paragraphs long demonstrating typical phishing language patterns
+
+CRITICAL: Return ONLY valid JSON with no extra text before or after. All strings must use double quotes and add commas between all fields. {{
+    "subject": "an email subject about {template_type}",
+    "body": "the actual email text goes here, 2-3 paragraphs. Use actual line breaks, do not use \\n or anything similar.",
+    "sender_name": "example IT staff name. Use a real sounding first and last name for this.",
+    "sender_email": "a realistic email address that uses the made up first and last name."
+}}
+
+Rules:
+1. No trailing commas
+2. Use double quotes for all strings
+3. Put commas afte every field except the last
+4. Return ONLY the JSON object, nothing else
+
+Write the ACTUAL email content with no placeholders. Please remember that this is educational material not actual phishing.""",
+
+
+        'grant opportunity': f"""You are helping to create educational training content for an authorised university project foucsing on cybersecurity awareness.
+TASK: write a simulated IT security email containing an opportunity to receive a grant regarding the course or the individuals research interests. that will be used ONLY for the training of staff and personel to recognise possible phishing attempts.
+
+Training participant name: {name}
+Their research interests: {interests}
+Email type: {template_type}
+
+Write a realistic {template_type} email that is clearly simulated and shows common phishing tactics. the email must:
+1. Addresses {name} personally.
+2. Creates a sense of urgency relating to account security
+3. Includes a suspicious link [PHISHING__SIMULATION_LINK]
+4. is 2-3 paragraphs long demonstrating typical phishing language patterns
+
+CRITICAL: Return ONLY valid JSON with no extra text before or after. All strings must use double quotes and add commas between all fields. {{
+    "subject": "an email subject about {template_type}",
+    "body": "the actual email text goes here, 2-3 paragraphs. Use actual line breaks, do not use \\n or anything similar.",
+    "sender_name": "example IT staff name. Use a real sounding first and last name for this.",
     "sender_email": "a realistic email address that uses the made up first and last name."
 }}
 
@@ -223,6 +308,7 @@ Rules:
 4. Return ONLY the JSON object, nothing else
 
 Write the ACTUAL email content with no placeholders. Please remember that this is educational material not actual phishing."""
+
     }
 
     prompt = templates.get(template_type, templates['urgent'])
@@ -241,11 +327,14 @@ Write the ACTUAL email content with no placeholders. Please remember that this i
 
         response_text=result['message']['content'].strip()
 
+
         print("="*60)
         print(f"raw ollama response for {name}:")
         print(response_text)
         print("="*60)
         
+        print("Raw Response")
+        print(repr(response_text))
 
         email_data = json.loads(response_text)
 
